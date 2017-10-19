@@ -16,8 +16,8 @@
 	padding-top: 30px;
 	position: relative;
 	text-align: center;
-	margin-left: 50%;
-	transform: translateX(-50%);
+	/*margin-left: 50%;*/
+	/*transform: translateX(-50%);*/
 }
 
 .nav-bar {
@@ -31,19 +31,34 @@
 	top: 0;
 }
 
-@media screen and (max-width: 800px) {
-
+@media screen and (max-width: 470px){
     .nav-link {
-    	color: black;
-        padding: 5px 20px 5px 20px;
+    	border: solid black 1px;
+    	margin: -5px;
+        padding: 10px 5px 10px 5px;
+        background: rgb(40, 40, 40);
     }
-
 }
 
-.nav-link {
-	margin: 0px;
+@media screen and (min-width: 470px) and (max-width: 800px){
+    .nav-link {
+    	margin: 0px;
+        padding: 10px 10px 10px 10px;
+        background: rgb(40, 40, 40);
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .nav-link {
+    margin: 0px;
 	padding: 10px 20px 10px 20px;
-	background: rgb(43, 43, 43);
+	background: rgb(40, 40, 40);
+    }
+}
+
+.nav-link:hover {
+	background: rgb(150, 150, 150);
+	color: rgb(40, 40, 40);
 }
 
 /* Notification Center */
@@ -160,7 +175,7 @@
 /* Table Key Value*/
 
 .tbl-kv td{
-	border: solid 1px rgb(150, 150, 150);
+	border: solid 1px rgb(170, 170, 170);
 	padding: 5px;
 }
 
@@ -191,7 +206,7 @@ footer {
 
 body {
 	margin-top: 120px;
-	color: rgb(150, 150, 150);
-	font-family: "Roboto Mono", light;
+	color: rgb(170, 170, 170);
+	font-family: "Roboto Mono", nor;
 	background: black;
 }
