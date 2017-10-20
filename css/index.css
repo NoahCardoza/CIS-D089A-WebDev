@@ -197,7 +197,18 @@ textarea.msg-input {
 	
 	background-color: rgba(40, 40, 40, .95);
 	padding: 10px;
-	margin-top: 5%;
+	margin-bottom: 30px;
+	width: 100%;
+}
+
+.block-expand {
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+	
+	background-color: rgba(40, 40, 40, .95);
+	padding: 10px;
+	margin-bottom: 30px;
 	width: 100%;
 }
 /* Table */
@@ -235,9 +246,10 @@ footer {
 }
 
 body {
-	margin-top: 120px;
+	margin-top: 100px;
 	color: rgb(170, 170, 170);
 	font-family: "Roboto Mono";
+	font-weight: lighter;
 	font-size: 16px;
 	background: black;
 }

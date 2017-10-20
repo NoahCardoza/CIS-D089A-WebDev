@@ -157,7 +157,7 @@ if (window.chrome) // isChrome
 	WebFont.load({
 	  custom: {
 	    families: ['Roboto Mono'],
-	    urls : ['https://fonts.googleapis.com/css?family=Roboto+Mono:100,700']
+	    urls : ['fonts/roboto-mono-v5-latin/roboto-mono.css']
 	  },
 	  active:function(){
 		c = canvas.getContext('2d');
