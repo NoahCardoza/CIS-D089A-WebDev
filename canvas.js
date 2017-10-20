@@ -146,7 +146,10 @@ function animate(){
 	requestAnimationFrame(animate);
 }
 
-document.querySelector(".block-x").onclick = _ => document.querySelector(".block-notify").style.display = 'none'; 
+document.querySelector(".block-x").onclick = () => {
+	document.querySelector("body").classList.remove("disable-scrolling");
+	document.querySelector(".block-notify").style.display = 'none';
+} 
 
 var canvas		= document.querySelector('canvas');
 canvas.width	= window.innerWidth;
@@ -191,6 +194,7 @@ if (window.chrome) // isChrome
 	}
 	});
 } else {
+	document.querySelector("body").classList.add("disable-scrolling");
 	document.querySelector(".block-notify").style.display = 'block';
 }
 

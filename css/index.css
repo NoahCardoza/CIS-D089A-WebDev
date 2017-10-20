@@ -164,13 +164,14 @@ textarea.msg-input {
 {
 	padding-top: 50px;	
 	display: none;
-	position: absolute;
+	position: fixed;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
 	z-index: 5000;
-	background-color: rgba(0,0,0,.9)
+	background-color: rgba(0,0,0,.8);
+	overflow: hidden;
 }
 
 .block-x {
@@ -241,6 +242,12 @@ canvas {
 }
 
 /* Body*/
+
+.disable-scrolling {
+	margin: 0;
+	height: 100%;
+	overflow: hidden}
+}
 
 footer {
 	margin-bottom: 30px;
