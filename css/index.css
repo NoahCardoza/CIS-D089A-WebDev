@@ -162,6 +162,7 @@ textarea.msg-input {
 
 .block-notify
 {
+	padding-top: 50px;	
 	display: none;
 	position: absolute;
 	left: 0;
@@ -177,8 +178,8 @@ textarea.msg-input {
 	font-size: 32px;
 	color: rgb(255, 43, 43);
 	position: absolute;
-	top: 0px;
-	right: 0px;
+	top: 5px;
+	right: 5px;
 	transform: translate(-100%);
 }
 .block-center {
