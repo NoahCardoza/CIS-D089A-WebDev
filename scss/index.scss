@@ -309,21 +309,9 @@ textarea.msg-input {
   border-color: $warning_secondary;
 }
 
-// $info_primary: #81a0d3;
-// $info_secondary: #4289ff;
-// $info_tertiary: #fff;
-
-// .lable-info {
-//   color: white;
-//   background: #81a0d3;
-//   border-color: #bad4ff;
-// }
-
 /* Float */
-
-.float-left {display: inline; float: left;}
-.float-right {display: inline; float: right;}
-
+[float="left"] {display: inline; float: left;}
+[float="right"] {display: inline; float: right;}
 
 /* Table */
 
@@ -368,7 +356,7 @@ footer {
 }
 
 body {
-  margin-top: 100px;
+  margin: 0;
   color: $light;
   font-family: $font_family;
   font-weight: lighter;

@@ -8,115 +8,79 @@
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="fonts/roboto-mono-v5-latin/roboto-mono.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
-	<script src="fonts/webfont.js"></script>
-	<style type="text/css">
-		html, body, .computer {
-			margin: 0;
-			background: pink;
-			height: 100%;
-			overflow:hidden;
-		}
-		.desktop {
-			height: 100%;
-			background:lime;
-		}
-		.windows {
-			display: flex;
-		    flex-direction: column;
-		    justify-content: space-between;
-		    height: 100%;
-		}
-		.windows-row {
-			height: 100%;
-			width:100%;
-			background:blue;
-			display: -webkit-box;
-			display: -webkit-flex;
-			display: -ms-flexbox;
-			display: flex;
-		}
-		.windows-row:empty {
-			display: none;
-		}
-		.app {
-			background:#f00;
-			list-style-type:none;
-			width:inherit;
-			height: 100%;
-			border: 1px solid black;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/desktop.css">
+	<link rel="stylesheet" type="text/css" href="css/terminal.css">
+	<!-- <script src="fonts/webfont.js"></script> -->
 </head>
 <body>
-<div class="computer">
 	<div class="desktop">
+		<div class="status-bar"></div>
 		<div class="windows">
 			<div class="windows-row">
-				<div class="app"><div class="app-browser">0,0</div></div>
-				<div class="app"><div class="app-browser">1,0</div></div>
-				<div class="app"><div class="app-browser">2,0</div></div>
+				<div class="app">
+					<div class="app-terminal">
+					<!-- <stdout>
+			      	<entry>Last login: Sat Jul 22 19:52:49 on ttys000</entry>
+			        <error>That command does not exist.</error>
+			      </stdout>
+			      <prompt class="active"><pwd></pwd><stdin><cursor>&nbsp;</cursor><stdin></prompt> -->
+					</div>
+				</div>
+				<!-- <div class="app"><div class="app-browser">1,0</div></div> -->
+				<!-- <div class="app"><div class="app-browser">2,0</div></div> -->
 			</div>
 			<div class="windows-row">
 				<div class="app"><div class="app-browser">0,1</div></div>
-				<div class="app"><div class="app-browser">1,1</div></div>
-				<div class="app"><div class="app-browser">2,1</div></div>
+				<!-- <div class="app"><div class="app-browser">1,1</div></div> -->
+				<!-- <div class="app"><div class="app-browser">2,1</div></div> -->
 			</div>
-			<div class="windows-row">
+			<!-- <div class="windows-row">
 				<div class="app"><div class="app-browser">0,2</div></div>
 				<div class="app"><div class="app-browser">1,2</div></div>
 				<div class="app"><div class="app-browser">2,2</div></div>
-			</div>
+			</div> -->
 		</div>
 	</div>
-</div>
 </body>
 <script type="text/javascript">
+class Terminal {
+	constructor(selector){
+		this.env = {
+			pwd : ''
+		};
+
+		this.e = {
+			parent	: document.querySelector(selector),
+			stdout	: document.createElement('div'),
+    		prompt	: document.createElement('div'),
+    		pwd		: document.createElement('span'),
+    		input	: document.createElement('input'),
+		};
+
+		this.e.stdout.className = "stdout";
+		this.e.prompt.className = "prompt";
+		this.e.pwd.className 	= "pwd";
+		this.e.input.type		= "text";
+		this.e.parent.appendChild(this.e.stdout);
+		this.e.parent.appendChild(this.e.prompt);
+		this.e.prompt.appendChild(this.e.pwd);
+		this.e.prompt.appendChild(this.e.input);
+
+		this.e.parent.onclick = () => {
+			this.e.input.focus()
+		}
+	}
+}
+new Terminal('.app-terminal')
+</script>
+<!-- <script type="text/javascript">
 	document.querySelectorAll(".windows-row .app ").forEach((e)=>{e.onclick = ()=> {
 		e.style.display = 'none'
 		if (!Array.from(e.parentElement.children).filter((c)=>c.style.display != 'none').length){
 			e.parentElement.style.display = 'none';
 		}
 	}})
-</script>
+</script> -->
 <!-- <script src="canvas.js" type="text/javascript"></script> -->
 </script>
 </html>
-
-<!-- 
- <style type="text/css">
-* {
-	margin: 0;
-	padding: 0;
-}
-html,body,ul
-{
-    height: 100%;
-}
-ul
-{
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-}
-
-li
-{
-
-    display: table-row;
-	table-layout: fixed;
-    background: pink;
-}
-span
-{
-    display: table-cell;
-}
-li:first-child span
-{
-    border: none; /* no top border on first li */
-}
-</style>
-<ul>
-    <li><span>Item1</span><span>Item1.2</span></li>
-    <li><span>Item1</span></li>
-    <li><span>Item1</span></li>
-</ul> -->

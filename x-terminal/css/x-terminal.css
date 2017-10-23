@@ -1,0 +1,59 @@
+:host{
+  /*min-width: 50px*/;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  display: inline;
+  position: absolute;
+  overflow-wrap: break-word;
+}
+
+entry:after, error:after, prompt.executed:after  { /*stdout:after,*/
+  white-space: pre-wrap;
+  content: "\A";
+}
+
+error:before {
+  font-weight: bold;
+  content: "Error: ";
+}
+
+/*error:after {
+  white-space: pre-wrap;
+  content: "\A";
+}
+
+entry:after {
+  white-space: pre-wrap;
+  content: "\A";
+}
+*/
+
+entry.inline {
+  display: inline-block;
+  width: 50%;
+}
+
+entry.input {
+  display: inline-block;
+}
+
+
+prompt.error:before {
+  color: #ff6e67;
+  /*content: '\00279C  '; /*➜*/*/
+}
+
+prompt:before {
+  color: #5ffa68;
+  content: '\00279C\00a0\00a0'; /*➜ / \00a0 = ' '*/
+}
+
+pwd:before {
+  color: #a8abff;
+  content: '~'; /*➜*/
+}
+
+pwd:after {
+  content: ' '; /*➜*/
+}

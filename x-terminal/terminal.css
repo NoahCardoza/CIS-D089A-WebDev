@@ -1,0 +1,73 @@
+body {
+    /* font */
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 300;
+  font-size: 16px;
+  color: lime;
+  margin: 0;
+
+  background: black;
+}
+.window {
+  /* window size */
+  margin: 0;
+  position: absolute;
+  
+  width: 100%;
+  height: 100%;
+  top: 0; 
+  left: 0;
+  padding: 20px;
+  
+}
+
+entry:after, error:after, prompt.executed:after  { /*stdout:after,*/
+  white-space: pre-wrap;
+  content: "\A";
+}
+
+error:before {
+  font-weight: bold;
+  content: "Error: ";
+}
+
+/*error:after {
+  white-space: pre-wrap;
+  content: "\A";
+}
+
+entry:after {
+  white-space: pre-wrap;
+  content: "\A";
+}
+*/
+
+entry.inline {
+  display: inline-block;
+  width: 50%;
+}
+
+
+prompt.error:before {
+  color: #ff6e67;
+  /*content: '\00279C  '; /*➜*/*/
+}
+
+prompt:before {
+  color: #5ffa68;
+  content: '\00279C\00a0\00a0'; /*➜ / \00a0 = ' '*/
+}
+
+pwd:before {
+  color: #a8abff;
+  content: '~'; /*➜*/
+}
+
+pwd:after {
+  content: ' '; /*➜*/
+}
+
+
+prompt {
+  
+}

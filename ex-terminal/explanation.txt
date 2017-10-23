@@ -1,0 +1,6 @@
+ok so first, we could make a database of all the commands.
+js<stdin> => api/terminal<stdin> => terminal.php {parses} <stdin>} => <cmds, args> => db <true || false> ¬
+if (true)
+	<args> => open(<cmd>.php) => output
+else
+	err message

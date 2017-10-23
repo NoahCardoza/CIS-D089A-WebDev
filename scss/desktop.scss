@@ -1,0 +1,69 @@
+
+$lighter: rgb(200, 200, 200);
+$grey: rgb(40, 40, 40);
+$red: rgb(255, 43, 43);
+$light: rgb(170, 170, 170);
+
+$font_family: "Roboto Mono";
+$darkgrey: rgb(30, 30, 30);
+$fadedblack: rgba(0,0,0,.8);
+$fadeddarkgrey: rgba(40, 40, 40, .95);
+
+// colors
+$info_primary: #66B2FF;
+$info_secondary: #0080FF;
+
+$error_primary: #ff3d3d;
+$error_secondary: #d62727;
+
+$success_primary: #5ee065;
+$success_secondary: #47b731;
+
+$warning_primary: #ffcb4a;
+$warning_secondary: #e8a312;
+
+html, body, .computer {
+	margin: 0;
+	height: 100%;
+	overflow:hidden;
+}
+.status-bar {
+	height: 23px;
+}
+.desktop {
+	height: calc(100% - 20px);
+}
+.windows {
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.windows-row {
+	height: 100%;
+	width:100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+.windows-row:empty {
+	display: none;
+}
+.app {
+	background:$grey;
+	list-style-type:none;
+	width:inherit;
+	height: 100%;
+	width: 100%;
+	border: 1px solid black;
+}
+
+[class^="app-"] {
+	height: 100%;
+	width: 100%;
+}
+
+.app-terminal {
+	background: #000;
+}
