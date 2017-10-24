@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="css/terminal.css">
 	<script src="api.js"></script>
 	<script src="rhaboo.min.js"></script>
+	<script src="object.watch.js"></script>
 </head>
 <body>
 	<div class="desktop">
@@ -81,14 +82,24 @@ class Terminal {
 			DB.write('terminal', {history:[]})
 		this.history = DB.terminal.history.length;
 		this.env = {
-			pwd : ''
+			pwd : '/'
 		};
+
+		this.env.watch('pwd', (v) => {
+			if (v == '/')
+				this.e.pwd.innerText = '/';
+			else
+			{
+				var dirs = v.split('/');
+				this.e.pwd.innerText = dirs[dirs.length - 1];
+			}
+		});
 
 		this.e = {
 			parent	: document.querySelector(selector),
 			stdout	: createElement('div', {className:"stdout"}),
     		prompt	: createElement('div', {className:"prompt-active"}),
-    		pwd		: createElement('span', {className:"pwd", innerText:"~"}),
+    		pwd		: createElement('span', {className:"pwd", innerText:this.env.pwd}),
     		input	: createElement('input', {type:"text"}),
 		};
 		this.e.parent.appendChild(this.e.stdout);
@@ -139,7 +150,7 @@ class Terminal {
 		
 		this.e.input.value = '';
 		this.e.input.setAttribute('disabled', '')
-		API("terminal", {stdin:cmd}).then(this.exe.bind(this, prompt)) 
+		API("terminal", {stdin:cmd, env:this.env}).then(this.exe.bind(this, prompt)) 
 	}
 	// This is used to send messages to the terminal screen
 	send(location, html, argv){
@@ -154,9 +165,16 @@ class Terminal {
 		}
 	}
 	exe(prompt, req){
+		console.log(req);
 		prompt.className = ('prompt-'+['error', 'success'][req.status]);
 		if (req.stdout){
 			this.e.stdout.appendChild(req.stdout.toDOM());
+		}
+		if (req.env){
+			for (var k in req.env)
+			{
+				this.env[k] = req.env[k];
+			}
 		}
 		if (req.callback){
 			console.log('not yet implemented')
