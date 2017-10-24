@@ -12,20 +12,11 @@
   padding: 20px;
   background: #000;
 }
-.prompt {
-  display: flex;
-}
 .app-terminal input {
-  transform: translateY(-50%);
   flex: 1;
 }
 
-.entry:after, error:after, prompt.executed:after  { /*stdout:after,*/
-  white-space: pre-wrap;
-  content: "\A";
-}
-
-.error:before {
+.error:not(.prompt):before {
   font-weight: bold;
   content: "Error: ";
 }
@@ -62,39 +53,39 @@
 }
 
 .stdout {
-  height: calc(100% - 20px);
+  height: calc(100% - 40px);
   overflow: scroll;
 }
 
-.prompt.error:before {
-  color: #ff6e67;
-  /*content: '\00279C  '; /*➜*/
-}
+// .prompt.error:before {
+//   color: #ff6e67;
+// }
 
-.prompt:before {
-  color: #5ffa68;
-  content: '\00279C\00a0\00a0'; /*➜ / \00a0 = ' '*/
+.prompt {
+  display: flex;
+  &:before {
+    display: flex;
+    align-items: center;
+    color: #5ffa68;
+    content: '\00279C\00a0';
+  }
+  &-active {
+    @extend .prompt;
+    &:before {color: #5ffa68;}
+  }
+  &-success {
+     @extend .prompt;
+    &:before {color: #5ffa68;}
+  }
+  &-error{
+     @extend .prompt;
+    &:before {color: #ff6e67;}
+  }
 }
 
 .pwd {
+  display: flex;
+  align-items: center;
   color: #a8abff;
+  &:after {content: '\00a0';}
 }
-
-.pwd:before {
-  // color: #a8abff;
-  // content: '~'; /*➜*/
-  // margin-right: 10px;
-}
-
-.pwd:after {
-  // content: ' '; /*➜*/
-}
-// prompt .active cursor {
-//   @include(4s linear 0s infinite alternate blink);
-// }
-
-.prompt.active .cursor {
-
-  @include animate(500ms linear infinite alternate blink);
-}
-

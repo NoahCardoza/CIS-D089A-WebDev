@@ -87,8 +87,8 @@ class Terminal {
 		this.e = {
 			parent	: document.querySelector(selector),
 			stdout	: createElement('div', {className:"stdout"}),
-    		prompt	: createElement('div', {className:"prompt active"}),
-    		pwd		: createElement('span', {className:"pwd"}),
+    		prompt	: createElement('div', {className:"prompt-active"}),
+    		pwd		: createElement('span', {className:"pwd", innerText:"~"}),
     		input	: createElement('input', {type:"text"}),
 		};
 		this.e.parent.appendChild(this.e.stdout);
@@ -135,6 +135,7 @@ class Terminal {
 		prompt.replaceChild(createElement('span', {innerText:prompt.lastChild.value}), prompt.lastChild);
 		prompt.className = 'prompt';
 		this.e.stdout.appendChild(prompt);
+		this.e.stdout.scrollTop = this.e.stdout.scrollHeight;
 		
 		this.e.input.value = '';
 		this.e.input.setAttribute('disabled', '')
@@ -153,13 +154,15 @@ class Terminal {
 		}
 	}
 	exe(prompt, req){
-		prompt.classList.add(['error', 'success'][req.status])
+		prompt.className = ('prompt-'+['error', 'success'][req.status]);
 		if (req.stdout){
 			this.e.stdout.appendChild(req.stdout.toDOM());
 		}
 		if (req.callback){
 			console.log('not yet implemented')
 		}
+		this.e.stdout.scrollTop = this.e.stdout.scrollHeight;
+
 		this.e.input.removeAttribute('disabled');
 		this.e.input.focus();
 	}
