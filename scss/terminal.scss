@@ -91,6 +91,9 @@ $warning_secondary: #e8a312;
 .stdout {
   height: calc(100% - 10px);
   overflow: scroll;
+  &::-webkit-scrollbar { 
+    display: none;
+  }
 }
 
 .prompt {
