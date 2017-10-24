@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/desktop.css">
 	<link rel="stylesheet" type="text/css" href="css/terminal.css">
-	<!-- <script src="fonts/webfont.js"></script> -->
+	<script src="api.js"></script>
 </head>
 <body>
 	<div class="desktop">
@@ -43,6 +43,15 @@
 	</div>
 </body>
 <script type="text/javascript">
+function createElement(type, attrs)
+{
+	var elm = document.createElement(type);
+	for (var attr in attrs) {
+		elm[attr] = attrs[attr]
+	}
+	return (elm);
+}
+
 class Terminal {
 	constructor(selector){
 		this.env = {
@@ -58,7 +67,7 @@ class Terminal {
 		};
 
 		this.e.stdout.className = "stdout";
-		this.e.prompt.className = "prompt";
+		this.e.prompt.className = "prompt active";
 		this.e.pwd.className 	= "pwd";
 		this.e.input.type		= "text";
 		this.e.parent.appendChild(this.e.stdout);
@@ -69,9 +78,44 @@ class Terminal {
 		this.e.parent.onclick = () => {
 			this.e.input.focus()
 		}
+
+		this.e.input.onkeydown = (e) => {
+			if (e.keyCode == 13)
+				this.submit();
+		}
+
+		this.send('entry', "Logged in on "+(new Date()).toGMTString())
+	}
+	// This sends an api request submitting whatever is in the prompt 
+	submit(){
+		var prompt = this.e.prompt.cloneNode(true)
+		prompt.replaceChild(createElement('span', {innerText:prompt.lastChild.value}), prompt.lastChild)
+		prompt.className = 'prompt';
+		this.e.stdout.appendChild(prompt);
+		var cmd = this.e.input.value;
+		this.e.input.value = '';
+		this.e.input.setAttribute('disabled', '')
+		// API Call
+		prompt.classList.add('error') // On receiving the API response set the status    
+		this.e.input.removeAttribute('disabled') // Add to the end of the API call
+
+		
+
+	}
+	// This is used to send messages to the terminal screen
+	send(location, html, argv){
+		var body = document.createElement('div');
+		if (location == 'entry'){
+			body.className = 'entry';
+			body.innerHTML = html;
+			this.e.stdout.appendChild(body);
+			return (body);
+		} else {
+			console.error('location invalid')
+		}
 	}
 }
-new Terminal('.app-terminal')
+terminal = new Terminal('.app-terminal')
 </script>
 <!-- <script type="text/javascript">
 	document.querySelectorAll(".windows-row .app ").forEach((e)=>{e.onclick = ()=> {

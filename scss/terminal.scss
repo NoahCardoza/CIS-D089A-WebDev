@@ -4,15 +4,6 @@
   box-sizing: border-box;
 }
 
-// body {
-//     /* font */
-//   font-family: 'Roboto Mono', monospace;
-//   font-weight: 300;
-//   font-size: 16px;
-//   margin: 0;
-
-//   background: black;
-// }
 .app-terminal {
   @include border-box;
   color: lime;
@@ -20,7 +11,6 @@
   height: 100%;
   padding: 20px;
   background: #000;
-  // display: flex;
 }
 .prompt {
   display: flex;
@@ -30,25 +20,15 @@
   flex: 1;
 }
 
-entry:after, error:after, prompt.executed:after  { /*stdout:after,*/
+.entry:after, error:after, prompt.executed:after  { /*stdout:after,*/
   white-space: pre-wrap;
   content: "\A";
 }
 
-error:before {
+.error:before {
   font-weight: bold;
   content: "Error: ";
 }
-
-// error:after {
-//   white-space: pre-wrap;
-//   content: "\A";
-// }
-
-// entry:after {
-//   white-space: pre-wrap;
-//   content: "\A";
-// }
 
 @mixin animate($args){
   -webkit-animation: $args;
@@ -76,7 +56,7 @@ error:before {
   }
 }
 
-entry.inline {
+.entry.inline {
   display: inline-block;
   width: 50%;
 }
@@ -96,10 +76,14 @@ entry.inline {
   content: '\00279C\00a0\00a0'; /*➜ / \00a0 = ' '*/
 }
 
-.pwd:before {
+.pwd {
   color: #a8abff;
-  content: '~'; /*➜*/
-  margin-right: 10px;
+}
+
+.pwd:before {
+  // color: #a8abff;
+  // content: '~'; /*➜*/
+  // margin-right: 10px;
 }
 
 .pwd:after {
