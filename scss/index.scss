@@ -310,8 +310,10 @@ textarea.msg-input {
 }
 
 /* Float */
-[float="left"] {display: inline; float: left;}
-[float="right"] {display: inline; float: right;}
+.float-left {display: inline; float: left;}
+.float-right {display: inline; float: right;}
+.flex-left {align-self: flex-start;}
+.flex-right {margin: auto;}
 
 /* Table */
 

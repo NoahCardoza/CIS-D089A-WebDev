@@ -28,16 +28,20 @@ html, body, .computer {
 	overflow:hidden;
 }
 .status-bar {
-	height: 23px;
+	display: flex;
+    align-items: center;
+	height: 28px;
+	background-color: $darkgrey;
+
 }
 .desktop {
-	height: calc(100% - 20px);
+	height: 100%;
 }
 .windows {
 	display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    height: calc(100% - 28px);
 }
 .windows-row {
 	height: 100%;
@@ -62,8 +66,4 @@ html, body, .computer {
 [class^="app-"] {
 	height: 100%;
 	width: 100%;
-}
-
-.app-terminal {
-	background: #000;
 }

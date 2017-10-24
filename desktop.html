@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CIS 89A: BOT.NET Theme</title>
+	<title>BOT.NET - Desktop</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -16,26 +16,23 @@
 </head>
 <body>
 	<div class="desktop">
-		<div class="status-bar"></div>
+		<div class="status-bar">
+			<span class="flex-right" id="clock">10:10:10</span>
+
+		</div>
 		<div class="windows">
 			<div class="windows-row">
 				<div class="app">
-					<div class="app-terminal">
-					<!-- <stdout>
-			      	<entry>Last login: Sat Jul 22 19:52:49 on ttys000</entry>
-			        <error>That command does not exist.</error>
-			      </stdout>
-			      <prompt class="active"><pwd></pwd><stdin><cursor>&nbsp;</cursor><stdin></prompt> -->
-					</div>
+					<div class="app-terminal"></div>
 				</div>
-				<!-- <div class="app"><div class="app-browser">1,0</div></div> -->
+				<!-- <div class="app"><div class="app-foxfire">1,0</div></div> -->
 				<!-- <div class="app"><div class="app-browser">2,0</div></div> -->
 			</div>
-			<div class="windows-row">
+			<!-- <div class="windows-row">
 				<div class="app"><div class="app-browser">0,1</div></div>
-				<!-- <div class="app"><div class="app-browser">1,1</div></div> -->
-				<!-- <div class="app"><div class="app-browser">2,1</div></div> -->
-			</div>
+				<div class="app"><div class="app-browser">1,1</div></div>
+				<div class="app"><div class="app-browser">2,1</div></div>
+			</div> -->
 			<!-- <div class="windows-row">
 				<div class="app"><div class="app-browser">0,2</div></div>
 				<div class="app"><div class="app-browser">1,2</div></div>
@@ -188,6 +185,15 @@ class Terminal {
 		localStorage()
 	}
 }
+
+(function(){
+	var clock = document.querySelector("#clock");
+	(function update (){
+		clock.innerText = (new Date()).toTimeString().substr(0,8);
+		setTimeout(update, 1000);
+	})();
+})();
+
 terminal = new Terminal('.app-terminal')
 </script>
 <!-- <script type="text/javascript">

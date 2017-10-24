@@ -33,7 +33,11 @@ $warning_secondary: #e8a312;
   color: lime;
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: {
+    left: 20px;
+    right: 20px;
+    top: 5px; 
+  };
   background: #000;
   font-size: 12px;
 }
@@ -89,7 +93,9 @@ $warning_secondary: #e8a312;
 }
 
 .stdout {
-  height: calc(100% - 10px);
+  border-top: 1px solid $darkgrey;
+  border-bottom: 1px solid $darkgrey;
+  height: calc(100% - 35px);
   overflow: scroll;
   &::-webkit-scrollbar { 
     display: none;
@@ -106,6 +112,7 @@ $warning_secondary: #e8a312;
   }
   &-active {
     @extend .prompt;
+    margin-top: 3px; 
     &:before {color: #5ffa68;}
   }
   &-success {
