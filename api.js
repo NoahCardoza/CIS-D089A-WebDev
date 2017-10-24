@@ -2,8 +2,8 @@ var API = function(endpoint, data){
 	return new Promise( function( resolve, reject ) {
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', "http://battleofthe.net/api/"+endpoint+".php", true); // this will have to chage
-		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-		xhr.setRequestHeader("X-lax-HTTP", "1.4.05");
+		// xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+		// xhr.setRequestHeader("X-lax-HTTP", "1.4.05");
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhr.onload = function () {
 			if (this.status >= 200 && this.status < 300) {
@@ -25,6 +25,6 @@ var API = function(endpoint, data){
 				statusText: xhr.statusText
 			});
 		};
-		xhr.send(+JSON.stringify(data));
+		xhr.send(JSON.stringify(data));
 	});
 };
