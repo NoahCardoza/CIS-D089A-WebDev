@@ -10,191 +10,47 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/desktop.css">
 	<link rel="stylesheet" type="text/css" href="css/terminal.css">
-	<script src="api.js"></script>
-	<script src="rhaboo.min.js"></script>
-	<script src="object.watch.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/foxfire.css">
+	<script src="js/api.js"></script>
+	<script src="js/rhaboo.min.js"></script>
+	<script src="js/object.watch.js"></script>
 </head>
 <body>
 	<div class="desktop">
 		<div class="status-bar">
-			<span class="flex-right" id="clock">10:10:10</span>
-
+			<span class="flex-right" id="clock">42:42:42</span>
 		</div>
 		<div class="windows">
 			<div class="windows-row">
 				<div class="app">
 					<div class="app-terminal"></div>
 				</div>
-				<!-- <div class="app"><div class="app-foxfire">1,0</div></div> -->
-				<!-- <div class="app"><div class="app-browser">2,0</div></div> -->
+				<div class="app">
+					<div class="app-foxfire"></div>
+				</div>
+				<!-- <div class="app"><div class="app-browser"></div></div> -->
+			</div>
+			<div class="windows-row">
+				<div class="app"><div class="app-foxfire" id="foxfire-154873"></div></div>
+				<div class="app"><div class="app-terminal" id="terminal-154873"></div></div>
+				<!-- <div class="app"><div class="app-browser"></div></div> -->
 			</div>
 			<!-- <div class="windows-row">
-				<div class="app"><div class="app-browser">0,1</div></div>
-				<div class="app"><div class="app-browser">1,1</div></div>
-				<div class="app"><div class="app-browser">2,1</div></div>
-			</div> -->
-			<!-- <div class="windows-row">
-				<div class="app"><div class="app-browser">0,2</div></div>
-				<div class="app"><div class="app-browser">1,2</div></div>
-				<div class="app"><div class="app-browser">2,2</div></div>
+				<div class="app"><div class="app-browser"></div></div>
+				<div class="app"><div class="app-browser"></div></div>
+				<div class="app"><div class="app-browser"></div></div>
 			</div> -->
 		</div>
 	</div>
 </body>
+<script src="js/terminal.js"></script>
+<script src="js/foxfire.js"></script>
+<script src="js/desktop.js"></script>
 <script type="text/javascript">
 
-String.prototype.toDOM= function(){
-	var frag = document.createDocumentFragment();
-	var nodes = (new DOMParser()).parseFromString(this, 'text/html').body.childNodes;
-	for (var i = nodes.length - 1; i >= 0; i--) {
-		frag.appendChild(nodes[i]);
-	}
-	return (frag);
-};
 
-function getSelectedText() {
-        var text = "";
-        if (typeof window.getSelection != "undefined") {
-            text = window.getSelection().toString();
-        } else if (typeof document.selection != "undefined" && document.selection.type == "Text") {
-            text = document.selection.createRange().text;
-        }
-        return text;
-    }
 
-function createElement(type, attrs)
-{
-	var elm = document.createElement(type);
-	for (var attr in attrs) {
-		elm[attr] = attrs[attr]
-	}
-	return (elm);
-}
 
-DB = Rhaboo.persistent('bot.net_db');
-
-class Terminal {
-	constructor(selector){
-		if (!DB.terminal)
-			DB.write('terminal', {history:[]})
-		this.history = DB.terminal.history.length;
-		this.env = {
-			pwd : '/'
-		};
-
-		this.env.watch('pwd', (v) => {
-			if (v == '/')
-				this.e.pwd.innerText = '/';
-			else
-			{
-				var dirs = v.split('/');
-				this.e.pwd.innerText = dirs[dirs.length - 1];
-			}
-		});
-
-		this.e = {
-			parent	: document.querySelector(selector),
-			stdout	: createElement('div', {className:"stdout"}),
-    		prompt	: createElement('div', {className:"prompt-active"}),
-    		pwd		: createElement('span', {className:"pwd", innerText:this.env.pwd}),
-    		input	: createElement('input', {type:"text", autocapitalize:false}),
-		};
-		this.e.parent.appendChild(this.e.stdout);
-		this.e.parent.appendChild(this.e.prompt);
-		this.e.prompt.appendChild(this.e.pwd);
-		this.e.prompt.appendChild(this.e.input);
-
-		this.e.parent.onclick = () => {
-			if (!getSelectedText())
-				this.e.input.focus();
-		}
-
-		this.e.input.onkeydown = (e) => {
-			if (e.keyCode == 13)
-				this.submit();
-			else if (e.keyCode == 38) // up
-			{
-				if (this.history - 1 >= 0)
-				{
-					this.e.input.value = DB.terminal.history[--this.history];
-					setTimeout(()=>this.e.input.selectionStart = this.e.input.selectionEnd = this.e.input.value.length, 0) // to clear the stack
-				}
-			}
-			else if (e.keyCode == 40) // down
-			{
-				if (this.history + 1 < DB.terminal.history.length)
-				{
-					this.e.input.value = DB.terminal.history[++this.history];
-					setTimeout(()=>this.e.input.selectionStart = this.e.input.selectionEnd = this.e.input.value.length, 0) // to clear the stack
-				}
-				else
-					this.e.input.value = "";
-			}
-		}
-
-		this.send('entry', "Logged in on "+(new Date()).toGMTString())
-	}
-	// This sends an api request submitting whatever is in the prompt 
-	submit(){
-		var prompt = this.e.prompt.cloneNode(true);
-		var cmd = this.e.input.value;
-		DB.terminal.history.push(cmd);
-		this.history = DB.terminal.history.length;
-		prompt.replaceChild(createElement('span', {innerText:prompt.lastChild.value}), prompt.lastChild);
-		prompt.className = 'prompt';
-		this.e.stdout.appendChild(prompt);
-		this.e.stdout.scrollTop = this.e.stdout.scrollHeight;
-		
-		this.e.input.value = '';
-		this.e.input.setAttribute('disabled', '')
-		API("terminal", {stdin:cmd, env:this.env}).then(this.exe.bind(this, prompt)) 
-	}
-	// This is used to send messages to the terminal screen
-	send(location, html, argv){
-		var body = document.createElement('div');
-		if (location == 'entry'){
-			body.className = 'entry';
-			body.innerHTML = html;
-			this.e.stdout.appendChild(body);
-			return (body);
-		} else {
-			console.error('location invalid')
-		}
-	}
-	exe(prompt, req){
-		console.log(req);
-		prompt.className = ('prompt-'+['error', 'success'][req.status]);
-		if (req.stdout){
-			this.e.stdout.appendChild(req.stdout.toDOM());
-		}
-		if (req.env){
-			for (var k in req.env)
-			{
-				this.env[k] = req.env[k];
-			}
-		}
-		if (req.callback){
-			console.log('not yet implemented')
-		}
-		this.e.stdout.scrollTop = this.e.stdout.scrollHeight;
-
-		this.e.input.removeAttribute('disabled');
-		this.e.input.focus();
-	}
-	history(){
-		localStorage()
-	}
-}
-
-(function(){
-	var clock = document.querySelector("#clock");
-	(function update (){
-		clock.innerText = (new Date()).toTimeString().substr(0,8);
-		setTimeout(update, 1000);
-	})();
-})();
-
-terminal = new Terminal('.app-terminal')
 </script>
 <!-- <script type="text/javascript">
 	document.querySelectorAll(".windows-row .app ").forEach((e)=>{e.onclick = ()=> {

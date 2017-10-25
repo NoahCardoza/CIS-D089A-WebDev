@@ -1,32 +1,12 @@
+@import "moduals/defaults";
 
-$lighter: rgb(200, 200, 200);
-$grey: rgb(40, 40, 40);
-$red: rgb(255, 43, 43);
-$light: rgb(170, 170, 170);
-
-$font_family: "Roboto Mono";
-$darkgrey: rgb(30, 30, 30);
-$fadedblack: rgba(0,0,0,.8);
-$fadeddarkgrey: rgba(40, 40, 40, .95);
-
-// colors
-$info_primary: #66B2FF;
-$info_secondary: #0080FF;
-
-$error_primary: #ff3d3d;
-$error_secondary: #d62727;
-
-$success_primary: #5ee065;
-$success_secondary: #47b731;
-
-$warning_primary: #ffcb4a;
-$warning_secondary: #e8a312;
 
 html, body, .computer {
 	margin: 0;
 	height: 100%;
 	overflow:hidden;
 }
+
 .status-bar {
 	display: flex;
     align-items: center;
@@ -34,15 +14,18 @@ html, body, .computer {
 	background-color: $darkgrey;
 
 }
+
 .desktop {
 	height: 100%;
 }
+
 .windows {
 	display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: calc(100% - 28px);
 }
+
 .windows-row {
 	height: 100%;
 	width:100%;
@@ -51,16 +34,19 @@ html, body, .computer {
 	display: -ms-flexbox;
 	display: flex;
 }
+
 .windows-row:empty {
 	display: none;
 }
+
 .app {
+	@include border-box;
 	background:$grey;
 	list-style-type:none;
 	width:inherit;
 	height: 100%;
 	width: 100%;
-	border: 1px solid black;
+	border: 1px solid $light;
 }
 
 [class^="app-"] {

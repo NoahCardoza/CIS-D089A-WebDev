@@ -1,0 +1,110 @@
+@import "moduals/defaults";
+
+//https://codepen.io/vkjgr/pen/nEvFA?editors=0100
+
+@-webkit-keyframes rotate {
+  100% { -webkit-transform: rotate(405deg); }
+}
+@keyframes rotate {
+  100% { transform: rotate(405deg); }
+}
+
+
+.app-foxfire {
+
+	& input {
+		padding: 5px 10px;
+	}
+
+	& iframe {
+		@include border-box;
+		border: none;
+		border-top: solid 2px $darkgrey;
+		width: 100%;
+		height: calc(100% - 53px);
+	}
+
+	& .url {
+		padding: 2px 5px;
+		display: flex;
+      	align-items: center;
+	}
+
+	& .arrow{
+		padding-top: 2px;
+		border-radius: 3px;
+		background-color: $light;
+		margin-right: 4px; 
+		&:before {
+			transform: translateY(1px);
+			content: '';
+			display: inline-block;
+			margin: 2px;
+			width: 0; 
+			height: 0; 
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+		}
+	 	&-right {
+	 		@extend .arrow;
+	 		padding-left: 5.5px;
+	 		padding-right: 3.5px;
+			&:before {border-left: 17px solid black;}
+		}
+		&-left {
+			@extend .arrow;
+			padding-right: 5.5px;
+			padding-left: 3.5px;
+			&:before {border-right:17px solid black;}
+		}
+	}
+
+	& .reload { // https://codepen.io/vkjgr/pen/nEvFA?editors=0100
+		border-radius: 3px;
+		background-color: $light;
+		margin-right: 4px; 
+		display: inline-block;
+		position: relative;
+		padding: 5px;
+		&:before, &:after {
+			@include border-box();
+			content: '';
+			display: block;
+		}
+		&:before {
+			border-color: transparent black black black;
+			border-radius: 50%;
+			border-style: solid;
+			border-width: 2px;
+			height: 20px;
+			width: 20px;
+			-webkit-transform: translateY(1px) rotate(45deg);
+			transform: translateY(1px) rotate(45deg);
+		}
+		&:after {
+			transform: translateY(1.5px);
+			border-color: transparent transparent transparent black;
+			border-style: solid;
+			border-width: 6px 0 6px 10px;
+			height: 0;
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 0;
+		}
+
+		&.loading {
+			&:before {
+				-webkit-animation: rotate 1.5s linear infinite;
+	  			animation: rotate 1.5s linear infinite;
+	  			-webkit-transform: rotate(45deg);
+    			transform: rotate(45deg);
+	  		}
+	  		&:after {
+				opacity: 0;
+	  		}
+		}
+	}
+}
+
+
