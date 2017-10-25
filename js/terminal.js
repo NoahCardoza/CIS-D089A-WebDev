@@ -109,6 +109,7 @@ class Terminal {
 		this.e.stdout.scrollTop = this.e.stdout.scrollHeight;
 
 		this.e.input.removeAttribute('disabled');
-		this.e.input.focus();
+		if (document.activeElement == document.body)
+			this.e.input.focus();
 	}
 }
