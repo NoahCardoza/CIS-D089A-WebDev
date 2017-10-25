@@ -97,7 +97,7 @@ class Terminal {
 			stdout	: createElement('div', {className:"stdout"}),
     		prompt	: createElement('div', {className:"prompt-active"}),
     		pwd		: createElement('span', {className:"pwd", innerText:this.env.pwd}),
-    		input	: createElement('input', {type:"text"}),
+    		input	: createElement('input', {type:"text", autocapitalize:false}),
 		};
 		this.e.parent.appendChild(this.e.stdout);
 		this.e.parent.appendChild(this.e.prompt);

@@ -55,6 +55,15 @@ $warning_secondary: #e8a312;
   }
 }
 
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+  .app-terminal input {
+    font-size: 16px;
+  }
+  .app-terminal {
+    font-size: 16px;
+  }
+}
+
 .error:before {
   color: $error_primary;
   font-weight: bold;
