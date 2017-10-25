@@ -1,5 +1,17 @@
 class Terminal {
 	constructor(selector){
+		API('desktop', {init:'terminal'}).then((r)=>{
+			if (r.status){
+				this.init(selector, r.id);
+			} else {
+				console.error("Couldn't Retrive Window ID!");
+			}
+		});
+	}
+
+	init(selector, id)
+	{
+		this.id = id;
 		if (!DB.terminal)
 			DB.write('terminal', {history:[]})
 		this.history = DB.terminal.history.length;
@@ -24,6 +36,7 @@ class Terminal {
     		pwd		: createElement('span', {className:"pwd", innerText:this.env.pwd}),
     		input	: createElement('input', {type:"text", autocapitalize:false}),
 		};
+		this.e.parent.id = id;
 		this.e.parent.appendChild(this.e.stdout);
 		this.e.parent.appendChild(this.e.prompt);
 		this.e.prompt.appendChild(this.e.pwd);
@@ -72,7 +85,7 @@ class Terminal {
 		
 		this.e.input.value = '';
 		this.e.input.setAttribute('disabled', '')
-		API("terminal", {stdin:cmd, env:this.env}).then(this.exe.bind(this, prompt)) 
+		API("terminal", {id:this.id, stdin:cmd, env:this.env}).then(this.exe.bind(this, prompt)) 
 	}
 	// This is used to send messages to the terminal screen
 	send(location, html, argv){

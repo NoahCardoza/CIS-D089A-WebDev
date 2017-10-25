@@ -37,6 +37,6 @@ function createElement(type, attrs)
 DB = Rhaboo.persistent('bot.net_db');
 
 terminal = new Terminal('.app-terminal');
-terminal = new Terminal('#terminal-154873');
+terminal2 = new Terminal('#terminal-154873');
 foxfire = new Foxfire('.app-foxfire');
 foxfire2 = new Foxfire('#foxfire-154873');
