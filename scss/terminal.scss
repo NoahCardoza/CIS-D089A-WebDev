@@ -3,13 +3,13 @@
 .app-terminal {
   @include border-box;
   color: lime;
-  width: 100%;
-  height: 100%;
-  padding: {
-    left: 20px;
-    right: 20px;
-    top: 5px; 
-  };
+  // width: 100%;
+  // height: 100%;
+  // padding: {
+  //   left: 20px;
+  //   right: 20px;
+  //   top: 5px; 
+  // };
   background: #000;
   font-size: 12px;
 

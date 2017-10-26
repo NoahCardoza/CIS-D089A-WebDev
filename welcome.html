@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FoxFire - Welcome</title>
+</head>
+<body>
+	<h1>Wellcome to FoxFire!</h1>
+	<img src="foxfire.png" style="max-width:100px;">
+	<a href="test.html">Click here for a virus!</a>
+	<script type="text/javascript">
+		// window.addEventListener('popstate', function(event) {
+		// 	window.parent.postMessage('location change', '*');
+		// });
+		console.log(window.onbeforeunload);
+		window.onbeforeunload = function(e) {
+			window.parent.postMessage({
+				msg:'browser-log',
+				// href:window.location.href,
+				fid:window.frameElement.id,
+				href:document.activeElement.href
+			},'*');
+		};
+
+
+	</script>
+</body>
+</html>

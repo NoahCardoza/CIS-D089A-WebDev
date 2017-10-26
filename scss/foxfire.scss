@@ -1,6 +1,6 @@
 @import "moduals/defaults";
 
-//https://codepen.io/vkjgr/pen/nEvFA?editors=0100
+//https://codepen.io/vkjgr/pen/nEvFA
 
 @-webkit-keyframes rotate {
   100% { -webkit-transform: rotate(405deg); }
@@ -35,6 +35,9 @@
 		border-radius: 3px;
 		background-color: $light;
 		margin-right: 4px; 
+		&:hover {
+			background-color: $lighter;
+		}
 		&:before {
 			transform: translateY(1px);
 			content: '';
@@ -44,6 +47,12 @@
 			height: 0; 
 			border-top: 10px solid transparent;
 			border-bottom: 10px solid transparent;
+		}
+		&.unavailable{
+			pointer-events: none;
+			&:before {
+				opacity: .5;
+			}
 		}
 	 	&-right {
 	 		@extend .arrow;
@@ -59,13 +68,16 @@
 		}
 	}
 
-	& .reload { // https://codepen.io/vkjgr/pen/nEvFA?editors=0100
+	& .reload { // https://codepen.io/vkjgr/pen/nEvFA
 		border-radius: 3px;
 		background-color: $light;
 		margin-right: 4px; 
 		display: inline-block;
 		position: relative;
 		padding: 5px;
+		&:hover {
+			background-color: $lighter;
+		}
 		&:before, &:after {
 			@include border-box();
 			content: '';

@@ -37,6 +37,18 @@ function createElement(type, attrs)
 DB = Rhaboo.persistent('bot.net_db');
 
 terminal = new Terminal('.app-terminal');
-terminal2 = new Terminal('#terminal-154873');
+// terminal2 = new Terminal('#terminal-154873');
 foxfire = new Foxfire('.app-foxfire');
-foxfire2 = new Foxfire('#foxfire-154873');
+// foxfire2 = new Foxfire('#foxfire-154873');
+
+
+window.addEventListener('message', function(e) {
+	console.log(e);
+	switch (e.data.msg){
+		case "browser-log":
+		document.getElementById(e.data.fid).browser.urlChange(e.data.href);
+		break;
+
+ 	}
+
+});

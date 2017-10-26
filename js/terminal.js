@@ -116,6 +116,10 @@ class Terminal {
 				this.env[k] = req.env[k];
 			}
 		}
+		if (req.open)
+		{
+			this.open(req.open);
+		}
 		if (req.callback){
 			console.log('not yet implemented')
 		}
@@ -124,5 +128,8 @@ class Terminal {
 		this.e.input.removeAttribute('disabled');
 		if (document.activeElement == document.body)
 			this.e.input.focus();
+	}
+	open(app){
+		
 	}
 }
