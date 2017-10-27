@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BOT.NET - Desktop Test</title>
+	<link type="text/css" rel="stylesheet" href="//golden-layout.com/assets/css/goldenlayout-base.css" />
+	<link type="text/css" rel="stylesheet" href="//golden-layout.com/assets/css/goldenlayout-dark-theme.css" />
+	<style type="text/css">
+		h2{
+  font: 14px Arial, sans-serif;
+  color:#fff;
+  padding: 10px;
+  text-align: center;
+}
+	</style>
+</head>
+<body>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="//golden-layout.com/assets/js/goldenlayout.min.js"></script>
+<script type="text/javascript">
+	var config = {
+    content: [{
+        type: 'row',
+        content:[{
+            type: 'component',
+            componentName: 'Terminal',
+            componentState: { label: 'A' }
+        },{
+            type: 'column',
+            content:[{
+                type: 'component',
+                componentName: 'FoxFire',
+                componentState: { label: 'B' }
+            },{
+                type: 'component',
+                componentName: 'TextStrangler',
+                componentState: { label: 'C' }
+            }]
+        }]
+    }]
+};
+
+var myLayout = new GoldenLayout( config );
+
+myLayout.registerComponent( 'Terminal', function( container, componentState ){
+    container.getElement().html( '<h2>' + componentState.label + '</h2>' );
+});
+myLayout.registerComponent( 'FoxFire', function( container, componentState ){
+    container.getElement().html( '<h2>' + componentState.label + '</h2>' );
+});
+myLayout.registerComponent( 'TextStrangler', function( container, componentState ){
+    container.getElement().html( '<h2>' + componentState.label + '</h2>' );
+});
+
+myLayout.init();
+</script>
+</body>
+</html>
