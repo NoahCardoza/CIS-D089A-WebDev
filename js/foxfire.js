@@ -39,12 +39,6 @@ class Foxfire {
 				setTimeout(()=>{
 					this.e.input.value = this.e.iframe.contentWindow.location.href;
 				}, 100);
-
-				// setTimeout(()=>{
-				// 	this.e.input.value = this.e.iframe.contentWindow.location.href;
-				// 	if (this.e.input.value == href)
-				// 		this.e.next.classList.add('unavailable');
-				// }, 1000);
 			}}),
 			reload	: createElement('div', {className:"reload", onclick:() => this.go(this.url)}),
     		input	: createElement('input', {type:"text", autocapitalize:false}),

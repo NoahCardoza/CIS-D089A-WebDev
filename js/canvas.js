@@ -28,15 +28,18 @@ class Strip extends Array {
 		this.col = col || -length;
 		this.speed = (Math.random()*0.4)+0.1;
 		this.active = true;
-		this.shuffle();
+		this.shuffle(1);
 	}
 
 	static get max_slot(){return Math.floor(window.innerWidth/Strip.prototype.fontsize);}
 	static get max_col(){return Math.ceil(window.innerHeight/Strip.fontsize);}
 
-	shuffle(){
-		for (var i = 0; i < this.length; i++) {
-			this[i] = ['诶', '比', '西', '迪', '伊', '吉', '艾', '杰', '开', '哦', '屁', '提', '维'].rand();
+	shuffle(n){
+		if (n > 0.9)
+		{
+			for (var i = 0; i < this.length; i++) {
+				this[i] = ['诶', '比', '西', '迪', '伊', '吉', '艾', '杰', '开', '哦', '屁', '提', '维'].rand();
+			}
 		}
 	}
 
@@ -140,8 +143,11 @@ class Que extends Array{
 function animate(){
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	que.run(function(obj, i){
-		obj.print();
-		obj.shuffle();
+		// if (Math.random() > 0.5)
+		// {
+			obj.print();
+			obj.shuffle(Math.random());
+		// }
 	});
 	requestAnimationFrame(animate);
 }
