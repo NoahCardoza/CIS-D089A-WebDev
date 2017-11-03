@@ -11,13 +11,25 @@
   to {opacity: 0;}
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to { 
+    transform: rotate(360deg);
+  }
+}
+
 // Home Page Specific
 
 #register-block {
   & button {width:100%;}
 
   & #logo {
-    max-height: 100px;
+	& img {max-height: 100px;}
+	//&.open {
+		//animation: rotate 1s 1 linear;
+	//}
   }
 
   @include media('>tablet') {
@@ -32,6 +44,7 @@
       }
 
     & #logo {
+	  //transform-origin: center top;
       float: left;
       transform: scale(3.5) translate(-10px, 1px);
       margin-right: 100px;
@@ -47,6 +60,7 @@
         };
       }
       & #logo {
+		// transform-origin: center left;
         transform: scale(3.5) translateY(-12px);
         margin-bottom: 60px;
       }

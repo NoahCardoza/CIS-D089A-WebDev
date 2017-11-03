@@ -35,7 +35,7 @@
 		</div>
 		<div class="block-msg block-center" id="register-block">
 			<span class="anchor" id="register"></span>
-			<img class="hidden" src="logo.png" id="logo">
+			<div id="logo" class="hidden"><img src="logo.png"></div>
 			<table>
 				<div style="width: 100%;">
 					<input class="hidden" type="text" name="username" placeholder="Username:">
@@ -140,6 +140,7 @@
 				$.input.password.classList.remove('hidden');
 				$.img.logo.classList.remove("hidden");
 				$.block.register.classList.add("open");
+//				$.img.logo.classList.add("open");
 			} else {
 				API("login", {
 					username: $.input.username.value,
@@ -165,6 +166,7 @@
 				$.input.password.classList.remove('hidden');
 				$.block.register.classList.add("open");
 				$.img.logo.classList.remove("hidden");
+				//$.img.logo.classList.add("open");
 			} else {
 				API.bind({}, "register", {
 					username: $.input.username.value,
