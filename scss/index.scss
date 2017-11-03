@@ -2,38 +2,86 @@
 /* Hide/Show */
 
 @keyframes "fadein" {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 @keyframes "fadeout" {
-  from {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+
+// Home Page Specific
+
+#register-block {
+  & button {width:100%;}
+
+  & #logo {
+    max-height: 100px;
+  }
+
+  @include media('>tablet') {
+    display: flex;
+    align-items: center;
+
+    &.open {
+        margin: {
+          top: 60px;
+          bottom: 60px;
+        };
+      }
+
+    & #logo {
+      float: left;
+      transform: scale(3.5) translate(-10px, 1px);
+      margin-right: 100px;
+    }
+  }
+
+  @include media('<=tablet') {
+      
+      &.open {
+        margin: {
+          top: 180px;
+          bottom: 60px;
+        };
+      }
+      & #logo {
+        transform: scale(3.5) translateY(-12px);
+        margin-bottom: 60px;
+      }
+  }
+}
+
+// EFO
+
+
+.fade {
+  &-out {
     opacity: 1;
+    @include animate(fadeout 2s forwards);
   }
-  to {
+  &-in {
     opacity: 0;
+    @include animate(fadein 2s forwards);
   }
 }
 
-
-
-.fade-out {
-  opacity: 1;
-  @include animate(fadeout 2s forwards);
+.disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  &:hover {
+    opacity: .5;
+  }
 }
 
-.fade-in {
-  opacity: 0;
-  @include animate(fadein 2s forwards);
+.hidden {
+  display: none!important;
 }
 
 /* Input */
 
-input {
+input, button, textarea {
   width: 100%;
   background-color: $darkgrey;
   color: $lighter;
@@ -45,25 +93,12 @@ input {
   box-sizing: border-box;
   border-radius: 5px;
   resize: none;
+  &.msg-input {
+    height: 200px;
+  }
 }
 
-textarea {
-  width: 100%;
-  background-color: $darkgrey;
-  color: $lighter;
-  font-family: $font_family;
-  font-size: 16px;
-  border: inset rgb(230, 230, 230) 1px;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border-radius: 5px;
-  resize: none;
-}
-
-textarea.msg-input {
-  height: 200px;
-}
+button {width: auto;}
 
 /* Navigation */
 
@@ -99,35 +134,21 @@ textarea.msg-input {
     background: rgb(150, 150, 150);
     color: $grey;
   }
-}
-
-@media screen and (max-width: 470px) {
-  .nav-link {
+  @include media("<=448px"){ //448px is when it gets clipped
     margin: -5px;
     padding: 10px 5px 10px 5px;
   }
-}
 
-@media screen and (min-width: 470px) and (max-width: 800px) {
-  .nav-link {
+  @include media(">448px", "<=tablet"){
     margin: 0px;
     padding: 10px 10px 10px 10px;
   }
-}
 
-@media screen and (min-width: 800px) {
-  .nav-link {
+  @include media(">tablet"){
     margin: 5px;
     padding: 10px 20px 10px 20px;
   }
-}
 
-.disabled {
-  opacity: .5;
-  cursor: not-allowed;
-  &:hover {
-    opacity: .5;
-  }
 }
 
 /* Notification Center */
@@ -222,9 +243,6 @@ textarea.msg-input {
   margin-bottom: 30px;
   width: 100%;
   max-width: 600px;
-  // > .block-msg {
-  //   background-color: $lighter;
-  // }
 }
 
 [class^="block-update"] {
@@ -253,26 +271,26 @@ textarea.msg-input {
   font-weight: 500;
 }
 
-.lable-info {
-  background: $info_primary;
-  border-color: $info_secondary;
+.lable {
+  &-info {
+    background: $info_primary;
+    border-color: $info_secondary;
+  }
+  &-error {
+    background: $error_primary;
+    border-color: $error_secondary;
+  }
+  &-success {
+    background: $success_primary;
+    border-color: $success_secondary;
+  }
+  &-warning {
+    background: $warning_primary;
+    border-color: $warning_secondary;
+  }
 }
-
-.lable-error {
-  background: $error_primary;
-  border-color: $error_secondary;
-}
-
-.lable-success {
-  background: $success_primary;
-  border-color: $success_secondary;
-}
-.lable-warning {
-  background: $warning_primary;
-  border-color: $warning_secondary;
-}
-
 /* Float */
+
 .float-left {display: inline; float: left;}
 .float-right {display: inline; float: right;}
 .flex-left {align-self: flex-start;}
@@ -280,9 +298,7 @@ textarea.msg-input {
 
 /* Table */
 
-  /* Table Key Value*/
-
-.tbl-kv {
+.tbl-kv { // Table Key Value
   td {
     border: solid 1px rgb(170, 170, 170);
     padding: 5px;
@@ -294,7 +310,6 @@ textarea.msg-input {
 }
 
 /* Canvas */
-// test
 
 canvas {
   z-index: -1;
@@ -303,6 +318,7 @@ canvas {
   top: 0;
   background: black;
 }
+
 .disable-scrolling {
   margin: 0;
   height: 100%;
