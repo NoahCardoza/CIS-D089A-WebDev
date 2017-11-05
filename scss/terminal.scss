@@ -27,6 +27,7 @@
 		border-top: 1px solid $darkgrey;
 		border-bottom: 1px solid $darkgrey;
 		height: calc(100% - 35px);
+		overflow: -moz-scrollbars-none;
 		overflow: scroll;
 		&::-webkit-scrollbar { 
 			display: none;
