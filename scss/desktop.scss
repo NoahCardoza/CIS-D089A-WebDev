@@ -1,6 +1,5 @@
 @import "moduals/defaults";
 
-
 html, body, .computer {
 	margin: 0;
 	height: 100%;
@@ -9,7 +8,7 @@ html, body, .computer {
 
 .status-bar {
 	display: flex;
-    align-items: center;
+	align-items: center;
 	height: 28px;
 	background-color: $darkgrey;
 
@@ -21,13 +20,13 @@ html, body, .computer {
 
 .windows {
 	display: flex;
-    flex-direction: column;
-    height: calc(100% - 28px);
+	flex-direction: column;
+	height: calc(100% - 28px);
 }
 
-.windows-row {
+.window-row {
 	@include border-box;
-	border: solid 5px;
+	border: solid 2px;
 	height: 100%;
 	width: 100%;
 	display: -webkit-box;
@@ -42,13 +41,19 @@ html, body, .computer {
 // 	display: none;
 // }
 
+
+.closed {
+	display: none;
+}
+
 .app {
 	@include border-box;
 
 	&:not(:last-child) {
-		resize: horizontal;
-    	overflow: auto;
-    }
+		// resize: horizontal;
+		overflow: auto;
+	}
+
 
 	background:$grey;
 	width:inherit;

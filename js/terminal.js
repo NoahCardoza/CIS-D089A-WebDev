@@ -1,15 +1,19 @@
+
 class Terminal {
-	constructor(selector){
-		API('desktop', {init:'terminal'}).then((r)=>{
-			if (r.status){
-				this.init(selector, r.id);
-			} else {
-				console.error("Couldn't Retrive Window ID!");
-			}
-		});
+	constructor(root){
+		Terminal.instances.add(this);
+		this.root = root;
+		//		API('desktop', {init:'terminal'}).then((r)=>{
+		//			if (r.status){
+		//				this.init(root, r.id);
+		//			} else {
+		//				console.error("Couldn't Retrive Window ID!");
+		//			}
+		//		});
+		this.init(Math.random());
 	}
 
-	init(selector, id)
+	init(id)
 	{
 		this.id = id;
 		if (!DB.terminal)
@@ -30,48 +34,53 @@ class Terminal {
 		});
 
 		this.e = {
-			parent	: document.querySelector(selector),
-			stdout	: createElement('div', {className:"stdout"}),
-    		prompt	: createElement('div', {className:"prompt-active"}),
-    		pwd		: createElement('span', {className:"pwd", innerText:this.env.pwd}),
-    		input	: createElement('input', {type:"text", autocapitalize:false}),
+			parent : createElement('div', {className:"app-terminal", id:id}),
+			stdout : createElement('div', {className:"stdout"}),
+			prompt : createElement('div', {className:"prompt-active"}),
+			pwd : createElement('span', {className:"pwd", innerText:this.env.pwd}),
+			input : createElement('input', {type:"text", autocapitalize:false}),
 		};
-		this.e.parent.id = id;
+		
 		this.e.parent.appendChild(this.e.stdout);
 		this.e.parent.appendChild(this.e.prompt);
 		this.e.prompt.appendChild(this.e.pwd);
 		this.e.prompt.appendChild(this.e.input);
-
-		this.e.parent.onclick = () => {
-			if (!getSelectedText())
-				this.e.input.focus();
-		}
-
-		this.e.input.onkeydown = (e) => {
-			if (e.keyCode == 13)
-				this.submit();
-			else if (e.keyCode == 38) // up
-			{
-				if (this.history - 1 >= 0)
-				{
-					this.e.input.value = DB.terminal.history[--this.history];
-					setTimeout(()=>this.e.input.selectionStart = this.e.input.selectionEnd = this.e.input.value.length, 0) // to clear the stack
-				}
-			}
-			else if (e.keyCode == 40) // down
-			{
-				if (this.history + 1 < DB.terminal.history.length)
-				{
-					this.e.input.value = DB.terminal.history[++this.history];
-					setTimeout(()=>this.e.input.selectionStart = this.e.input.selectionEnd = this.e.input.value.length, 0) // to clear the stack
-				}
-				else
-					this.e.input.value = "";
-			}
-		}
-
+		this.focus = this.focus.bind(this);
+		this.onkeydown = this.onkeydown.bind(this);
+		this.e.parent.addEventListener("click", this.focus);
+		this.e.input.addEventListener("keydown", this.onkeydown);
+		this.root.appendChild(this.e.parent);
 		this.send('entry', "Logged in on "+(new Date()).toGMTString())
 	}
+
+	onkeydown(e){
+		if (e.keyCode == 13)
+			this.submit();
+		else if (e.keyCode == 38) // up
+		{
+			if (this.history - 1 >= 0)
+			{
+				this.e.input.value = DB.terminal.history[--this.history];
+				setTimeout(()=>this.e.input.selectionStart = this.e.input.selectionEnd = this.e.input.value.length, 0) // to clear the stack
+			}
+		}
+		else if (e.keyCode == 40) // down
+		{
+			if (this.history + 1 < DB.terminal.history.length)
+			{
+				this.e.input.value = DB.terminal.history[++this.history];
+				setTimeout(()=>this.e.input.selectionStart = this.e.input.selectionEnd = this.e.input.value.length, 0) // to clear the stack
+			}
+			else
+				this.e.input.value = "";
+		}
+	}
+
+	focus(){
+			if (!getSelectedText())
+				this.e.input.focus();
+	}
+		
 	// This sends an api request submitting whatever is in the prompt 
 	submit(){
 		var prompt = this.e.prompt.cloneNode(true);
@@ -82,11 +91,12 @@ class Terminal {
 		prompt.className = 'prompt';
 		this.e.stdout.appendChild(prompt);
 		this.e.stdout.scrollTop = this.e.stdout.scrollHeight;
-		
+
 		this.e.input.value = '';
 		this.e.input.setAttribute('disabled', '')
 		API("terminal", {id:this.id, stdin:cmd, env:this.env}).then(this.exe.bind(this, prompt)) 
 	}
+
 	// This is used to send messages to the terminal screen
 	send(location, html, argv){
 		var body = document.createElement('div');
@@ -104,6 +114,7 @@ class Terminal {
 			console.error('location invalid')
 		}
 	}
+
 	exe(prompt, req){
 		console.log(req);
 		prompt.className = ('prompt-'+['error', 'success'][req.status]);
@@ -129,7 +140,13 @@ class Terminal {
 		if (document.activeElement == document.body)
 			this.e.input.focus();
 	}
-	open(app){
-		
+
+	close(){
+		this.e.parent.removeEventListener("click", this.focus);
+		this.e.input.removeEventListener("keydown", this.onkeydown);
+		this.root.removeChild(this.e.parent);
 	}
 }
+
+Terminal.instances = new Set();
+
