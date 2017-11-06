@@ -1,14 +1,14 @@
 @import "moduals/defaults";
 /* Hide/Show */
 
-@keyframes "fadein" {
-	from {opacity: 0;}
-	to {opacity: 1;}
+@keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
 }
 
-@keyframes "fadeout" {
-	from {opacity: 1;}
-	to {opacity: 0;}
+@keyframes fadeout {
+	from { opacity: 1; }
+	to   { opacity: 0; }
 }
 
 @keyframes rotate {
@@ -70,16 +70,16 @@
 // EFO
 
 
-.fade {
-	&-out {
-		opacity: 1;
-		@include animate(fadeout 2s forwards);
-	}
-	&-in {
-		opacity: 0;
-		@include animate(fadein 2s forwards);
-	}
+.fade-out {
+	opacity: 1;
+	@include animate(fadeout 2s forwards);
 }
+
+.fade-in {
+	opacity: 0;
+	@include animate(fadein 2s forwards);
+}
+
 
 .disabled {
 	opacity: .5;
@@ -168,7 +168,9 @@ button {width: auto;}
 /* Notification Center */
 
 .tab-notify {
+	position: fixed!important;
 	z-index: 1000;
+	width: 100%;
 }
 
 .tab-x {
@@ -179,23 +181,41 @@ button {width: auto;}
 	transform: translateY(-40%);
 }
 
-[class^="tab-notification-"] {
+.tab-notification {
 	margin-top: 10px;
 	background: black;
 	padding: 10px;
+	&-success {
+		@extend .tab-notification;
+		border: 1px solid green;	
+	}
+	&-warning {
+		@extend .tab-notification;
+		border: 1px solid orange;
+	}
+	&-error {
+		@extend .tab-notification;
+		border: 1px solid red;
+	}
 }
 
-.tab-notification-success {
-	border: 1px solid green;
-}
+// [class^="tab-notification-"] {
+// 	margin-top: 10px;
+// 	background: black;
+// 	padding: 10px;
+// }
 
-.tab-notification-warning {
-	border: 1px solid orange;
-}
+// .tab-notification-success {
+	// border: 1px solid green;
+// }
 
-.tab-notification-error {
-	border: 1px solid red;
-}
+// .tab-notification-warning {
+	// border: 1px solid orange;
+// }
+
+// .tab-notification-error {
+	// border: 1px solid red;
+// }
 
 /* Column Organizers */
 
@@ -205,6 +225,7 @@ button {width: auto;}
 	left: 0;
 	top: 0;
 	width: 90%;
+	min-width: 300px;
 	max-width: max-content;
 	margin-left: 50%;
 	transform: translateX(-50%);
@@ -248,15 +269,28 @@ button {width: auto;}
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	background-color: $fadeddarkgrey;
-	padding: {
-		top: 10px;
-		bottom: 10px;
-		left: 25px;
-		right: 25px;
-	};
+	padding: 10px 25px;
+	@include media("<tablet"){
+		padding: 5px 5px;
+	}
 	margin-bottom: 30px;
 	width: 100%;
-	max-width: 600px;
+	&-sm {
+		@extend .block-msg;
+		max-width: 400px;
+	}
+	&-md {
+		@extend .block-msg;
+		max-width: 600px;
+	}
+	&-lg {
+		@extend .block-msg;
+		max-width: 800px;
+	}
+	&-xl {
+		@extend .block-msg;
+		max-width: 1000px;
+	}
 }
 
 [class^="block-update"] {
@@ -321,6 +355,50 @@ button {width: auto;}
 			font-weight: bold;
 		}
 	}
+}
+
+.tbl-ranks { // Table Key Value
+	thead {
+		color: $lighter;
+		background-color: $darkgrey;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	& .clan-tag {
+		margin-right: 2px;
+	}
+
+	tbody td {
+		@include media("<tablet"){
+			padding: 10px 1px;
+			& .clan-name {
+				display: none;
+			}
+		}
+		// width: 100%;
+		// border: solid 1px rgb(170, 170, 170);
+		padding: 10px 5px;
+		background-color: $grey;
+		text-align: center;
+		&:first-child {
+			color: $lighter;
+			font-weight: bold;
+		}
+	}
+	& td:nth-child(n+2) {
+		width: 30%;
+	}
+	& td:nth-child(n+4) {
+		width: 10%;
+	}
+	& td:nth-child(1) {
+		width: 5%;
+	}
+	& tbody td:nth-child(odd) {
+		background-color: $darkgrey;
+	}
+
 }
 
 /* Canvas */

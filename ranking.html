@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CIS 89A: BOT.NET Theme</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="fonts/roboto-mono-v5-latin/roboto-mono.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script src="fonts/webfont.js"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/api.js"></script>
+</head>
+<body style="margin-top: 100px;">
+	<div class="block-notify">
+		<span class="block-x">&times;</span>
+		<div class="col-center">
+			<div class="block-msg">
+				It seems you are not using Chrome... That's unfortunate, due to other browsers' single threaded approach canvas animations are extremely limited and poorly rendered.<br><br><b>The animation has been disabled!</b><br><br>We would encourage you to use <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a> instead. As of now it is most supported and used browser world wide. Read <a href="https://en.wikipedia.org/wiki/Usage_share_of_web_browsers">this</a> Wiki article to learn more.
+			</div>
+		</div>
+	</div>
+	<header class="nav-bar">
+		<div class="nav-inner">
+			<a class="nav-link" href="#">Ranking</a>
+		</div>
+	</header>
+	<section class="col-center">
+		<div class="block-msg block-center">
+			<h1>Ranking</h1>
+			<br>
+			<p>All data has been borrowed from <a href="https://legacy.hackerexperience.com">here</a> for the time being.</p>
+		</div>
+		<div id="ranks"></div>
+		<footer>
+			<div class="block-msg block-center">&copy; Galc-tech, 2016. All rights reserved.</div>
+		</footer>
+
+	</section>
+	<canvas></canvas>
+ <!-- <script src="js/canvas.js" type="text/javascript"></script> -->
+ <script type="text/javascript">
+ 	function handel(json){
+ 		var	parent = createElement("div", {className: "block-msg-lg"}),
+ 			table = createElement("table", {className: "tbl-ranks"}),
+ 			trow = table.createTHead().insertRow(),
+ 			tbody = table.createTBody()
+		parent.appendChild(table);
+ 		trow.appendChild(createElement("td", {innerText:"#"}))
+ 		trow.appendChild(createElement("td", {innerText:"Username"}))
+ 		trow.appendChild(createElement("td", {innerText:"Clan"}))
+ 		trow.appendChild(createElement("td", {innerText:"Lv"}))
+ 		trow.appendChild(createElement("td", {innerText:"Rep"}))
+ 		for (let i = json.length - 1; i >= 0; i--){
+ 			let row = tbody.insertRow();
+ 			row.insertCell().innerText = json[i].rank;
+ 			row.insertCell().appendChild(createElement("a", {href: "#", innerText:json[i].username}));
+ 			let [tag, ...name] = json[i].clan.split(' ');
+ 			let a = createElement("a", {href: "#"})
+ 			a.appendChild(createElement('span', {className:'clan-tag', innerText:tag}));
+ 			a.appendChild(createElement('span', {className:'clan-name', innerText:name.join(' ')}))
+ 			row.insertCell().appendChild(a);
+ 			row.insertCell().innerText = Math.floor(json[i].rep * 5 / 10000000) ;
+ 			row.insertCell().innerText = json[i].rep;
+ 		}
+ 		console.log(parent);
+ 		document.querySelector("#ranks").appendChild(parent);
+
+ 	}
+ 	API("rank-data.json", {}, 1).then(handel)
+ </script>
+ 		}
+</body>
+</html>

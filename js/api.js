@@ -1,14 +1,17 @@
 function API_handle_JSON(json){
 	if (json.notify){
-		notify(notify.time, notify.type, notify.title, notify.body);
+		notify(notify.time, notify.type, notify.title, notify.body).then(json.notify.callback || eval(json.notify.function));
 	}
 	return (json);
 }
 
-var API = function(endpoint, data){
+var API = function(endpoint, data, cors){
 	return new Promise( function( resolve, reject ) {
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', "http://battleofthe.net/api/"+endpoint+".php", true); // this will have to chage
+		if (cors)
+			xhr.open('GET', endpoint, true); // this will have to chage
+		else
+			xhr.open('POST', "http://battleofthe.net/api/"+endpoint+".php", true); // this will have to chage
 		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 		xhr.setRequestHeader("X-lax-HTTP", "1.4.05");
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
