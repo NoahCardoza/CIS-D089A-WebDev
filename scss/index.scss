@@ -26,10 +26,8 @@
 	& button {width:100%;}
 
 	& #logo {
-		& img {max-height: 100px;}
-		//&.open {
-			//animation: rotate 1s 1 linear;
-		//}
+		// max-height: 100px;
+		width: 20%;
 	}
 
 	@include media('>tablet') {
@@ -44,9 +42,8 @@
 		}
 
 		& #logo {
-			//transform-origin: center top;
 			float: left;
-			transform: scale(3.5) translate(-10px, 1px);
+			transform: scale(3) translateX(-10px);
 			margin-right: 100px;
 		}
 	}
@@ -60,9 +57,8 @@
 			};
 		}
 		& #logo {
-			// transform-origin: center left;
-			transform: scale(3.5) translateY(-12px);
-			margin-bottom: 60px;
+			transform: scale(3) translate(-2px,-12px);
+			margin-bottom: 15%;
 		}
 	}
 }
