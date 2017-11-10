@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>CIS 89A: BOT.NET Theme</title>
+	<title>BOT.NET - Ranking</title>
+	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -24,6 +25,8 @@
 	<header class="nav-bar">
 		<div class="nav-inner">
 			<a class="nav-link" href="#">Ranking</a>
+			<a class="nav-link" href="desktop.html">Desktop</a>
+			<!-- <a class="nav-link" href="#">Ranking</a> -->
 		</div>
 	</header>
 	<section class="col-center">
@@ -39,7 +42,7 @@
 
 	</section>
 	<canvas></canvas>
- <!-- <script src="js/canvas.js" type="text/javascript"></script> -->
+ <script src="js/canvas.js" type="text/javascript"></script>
  <script type="text/javascript">
  	function handel(json){
  		var	parent = createElement("div", {className: "block-msg-lg"}),
@@ -61,14 +64,14 @@
  			a.appendChild(createElement('span', {className:'clan-tag', innerText:tag}));
  			a.appendChild(createElement('span', {className:'clan-name', innerText:name.join(' ')}))
  			row.insertCell().appendChild(a);
- 			row.insertCell().innerText = Math.floor(json[i].rep * 5 / 10000000) ;
+ 			row.insertCell().innerText = Math.floor(json[i].rep * 5 / 1000000) ;
  			row.insertCell().innerText = json[i].rep;
  		}
  		console.log(parent);
  		document.querySelector("#ranks").appendChild(parent);
 
  	}
- 	API("rank-data.json", {}, 1).then(handel)
+ 	API("rank-data.json", {section:1}, 1).then(handel)
  </script>
 </body>
 </html>

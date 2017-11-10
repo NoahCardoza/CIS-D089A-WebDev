@@ -1,8 +1,9 @@
 
 class Terminal {
-	constructor(root){
+	constructor(root, sys){
 		Terminal.instances.add(this);
 		this.root = root;
+		this.sys = sys;
 		//		API('desktop', {init:'terminal'}).then((r)=>{
 		//			if (r.status){
 		//				this.init(root, r.id);
@@ -50,7 +51,20 @@ class Terminal {
 		this.e.parent.addEventListener("click", this.focus);
 		this.e.input.addEventListener("keydown", this.onkeydown);
 		this.root.appendChild(this.e.parent);
+		this.send('entry', '&nbsp;')
 		this.send('entry', "Logged in on "+(new Date()).toGMTString())
+		this.welcome();
+	}
+
+	welcome(){
+		var t = 1;
+		setTimeout(()=>this.send("entry", "Welcome to the BOT.net"),t++ * 1000)
+		setTimeout(()=>this.send("entry", "We regret to inform you that this os is incomplete."),t++ * 1000)
+		setTimeout(()=>this.send("entry", "A few commands that work are:"),t++ * 2000)
+		setTimeout(()=>{
+			this.send("entry", "echo<br>date<br>ls<br>cd")
+			this.focus();
+		}, t * 2000)
 	}
 
 	onkeydown(e){
@@ -145,6 +159,12 @@ class Terminal {
 		this.e.parent.removeEventListener("click", this.focus);
 		this.e.input.removeEventListener("keydown", this.onkeydown);
 		this.root.removeChild(this.e.parent);
+	}
+}
+
+Terminal.prototype.fscmd = {
+	cat: function(path){
+		console.log(this.sys.fs.read(path))
 	}
 }
 

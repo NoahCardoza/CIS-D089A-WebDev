@@ -20,9 +20,18 @@
 	}
 }
 
+h1, h2, h3, h4, h5, h6, {
+	display: block;
+}
+
 // Home Page Specific
 
 #register-block {
+	& .inner {
+		display: flex;
+		align-items: center;
+	}
+	
 	& button {width:100%;}
 
 	& #logo {
@@ -31,9 +40,7 @@
 	}
 
 	@include media('>tablet') {
-		display: flex;
-		align-items: center;
-
+		
 		&.open {
 			margin: {
 				top: 60px;
@@ -49,8 +56,10 @@
 	}
 
 	@include media('<=tablet') {
-
 		&.open {
+			& .inner {
+				display: block;
+			}
 			margin: {
 				top: 180px;
 				bottom: 60px;
@@ -116,8 +125,8 @@ button {width: auto;}
 	position: relative;
 	top: 0px;
 	display: block;
-	height: 140px;
-	margin-top: -140px;
+	height: 110px;
+	margin-top: -110px;
 	visibility: hidden;
 }
 
@@ -267,7 +276,7 @@ button {width: auto;}
 	background-color: $fadeddarkgrey;
 	padding: 10px 25px;
 	@include media("<tablet"){
-		padding: 5px 5px;
+		padding: 10px 5px;
 	}
 	margin-bottom: 30px;
 	width: 100%;
@@ -342,6 +351,11 @@ button {width: auto;}
 
 /* Table */
 
+table {
+	overflow-x: auto;
+	border-spacing: 0;
+}
+
 .tbl-kv { // Table Key Value
 	td {
 		border: solid 1px rgb(170, 170, 170);
@@ -354,6 +368,7 @@ button {width: auto;}
 }
 
 .tbl-ranks { // Table Key Value
+	-webkit-border-vertical-spacing: 5px;
 	thead {
 		color: $lighter;
 		background-color: $darkgrey;
@@ -365,16 +380,38 @@ button {width: auto;}
 		margin-right: 2px;
 	}
 
-	tbody td {
-		@include media("<tablet"){
-			padding: 10px 1px;
+	& td {
+		border-bottom: solid 3px $warning_primary;
+		padding: 20px 4px;
+	}
+
+	@include media("<=370px"){
+		& tbody td {
+			font-size: 9px;
+			padding: initial 1px;
 			& .clan-name {
 				display: none;
 			}
 		}
-		// width: 100%;
-		// border: solid 1px rgb(170, 170, 170);
-		padding: 10px 5px;
+	}
+
+	@include media(">370px", "<=490px"){
+		& tbody td {
+			font-size: 11px;
+			padding: 10 1px;
+			& .clan-name {
+				display: none;
+			}
+		}
+	}
+
+	tbody td {
+		@include media(">490px", "<=tablet"){
+			padding: initial 1px;
+			& .clan-name {
+				display: none;
+			}
+		}
 		background-color: $grey;
 		text-align: center;
 		&:first-child {
@@ -388,8 +425,9 @@ button {width: auto;}
 	& td:nth-child(n+4) {
 		width: 10%;
 	}
-	& td:nth-child(1) {
+	& td:first-child {
 		width: 5%;
+		border-bottom: solid 3px $warning_secondary;
 	}
 	& tbody td:nth-child(odd) {
 		background-color: $darkgrey;

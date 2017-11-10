@@ -56,8 +56,7 @@ class Strip extends Array {
 			this.fall();
 		} else {
 			this.replace();
-		}
-		
+		}	
 	}
 
 	replace(){

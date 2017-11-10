@@ -26,7 +26,7 @@ html, body, .computer {
 
 .window-row {
 	@include border-box;
-	border: solid 2px;
+	// border: solid 2px;
 	height: 100%;
 	width: 100%;
 	display: -webkit-box;
@@ -59,7 +59,7 @@ html, body, .computer {
 	width:inherit;
 	height: 100%;
 	width: 100%;
-	border: 1px solid $light;
+	// border: .1px solid $light;
 }
 
 [class^="app-"] {
