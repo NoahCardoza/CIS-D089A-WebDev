@@ -385,10 +385,25 @@ table {
 		padding: 20px 4px;
 	}
 
+	& td:nth-child(n+2) {
+		width: 30%;
+	}
+	& td:nth-child(n+4) {
+		width: 10%;
+	}
+	& td:first-child {
+		width: 5%;
+		border-bottom-color: $warning_secondary;
+	}
+	& tbody td:nth-child(odd) {
+		background-color: $darkgrey;
+	}
+
 	@include media("<=370px"){
 		& tbody td {
 			font-size: 9px;
-			padding: 10px 1px;
+			padding: 5px 1px;
+			border-bottom-width: 1px;
 			& .clan-name {
 				display: none;
 			}
@@ -399,6 +414,7 @@ table {
 		& tbody td {
 			font-size: 11px;
 			padding: 10px 1px;
+			border-bottom-width: 2px;
 			& .clan-name {
 				display: none;
 			}
@@ -407,7 +423,8 @@ table {
 
 	tbody td {
 		@include media(">490px", "<=tablet"){
-			padding: 10px 1px;
+			padding: 15px 1px;
+			border-bottom-width: 2px;
 			& .clan-name {
 				display: none;
 			}
@@ -418,19 +435,6 @@ table {
 			color: $lighter;
 			font-weight: bold;
 		}
-	}
-	& td:nth-child(n+2) {
-		width: 30%;
-	}
-	& td:nth-child(n+4) {
-		width: 10%;
-	}
-	& td:first-child {
-		width: 5%;
-		border-bottom: solid 3px $warning_secondary;
-	}
-	& tbody td:nth-child(odd) {
-		background-color: $darkgrey;
 	}
 
 }
