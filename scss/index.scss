@@ -381,7 +381,7 @@ table {
 	}
 
 	& td {
-		border-bottom: solid 3px $warning_primary;
+		border-bottom: solid 3px #5e5e5e;
 		padding: 20px 4px;
 	}
 
@@ -393,7 +393,6 @@ table {
 	}
 	& td:first-child {
 		width: 5%;
-		border-bottom-color: $warning_secondary;
 	}
 	& tbody td:nth-child(odd) {
 		background-color: $darkgrey;
