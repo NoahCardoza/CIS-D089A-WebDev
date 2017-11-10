@@ -393,6 +393,7 @@ table {
 	}
 	& td:first-child {
 		width: 5%;
+		// border-bottom-color: $darkgrey;
 	}
 	& tbody td:nth-child(odd) {
 		background-color: $darkgrey;
