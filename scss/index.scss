@@ -388,7 +388,7 @@ table {
 	@include media("<=370px"){
 		& tbody td {
 			font-size: 9px;
-			padding: initial 1px;
+			padding: 10px 1px;
 			& .clan-name {
 				display: none;
 			}
@@ -398,7 +398,7 @@ table {
 	@include media(">370px", "<=490px"){
 		& tbody td {
 			font-size: 11px;
-			padding: 10 1px;
+			padding: 10px 1px;
 			& .clan-name {
 				display: none;
 			}
@@ -407,7 +407,7 @@ table {
 
 	tbody td {
 		@include media(">490px", "<=tablet"){
-			padding: initial 1px;
+			padding: 10px 1px;
 			& .clan-name {
 				display: none;
 			}
