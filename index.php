@@ -87,7 +87,7 @@
 			<span class="anchor" name="contact"></span>
 			<h2 class="block-center">Contact</h2>
 			<p>If you have any concerns, comments, or death threats, those go here.</p>
-			<form id="userinput" style="width: 100%;">
+			<form id="userinput" style="width: 100%;" method="POST" action="http://battleofthe.net">
 				<input type="email" name="email" placeholder="Email (optional)">
 				<textarea name="msg" class="msg-input" placeholder="Type your heart out!"></textarea>
 				<input type="submit" value="Submit">
