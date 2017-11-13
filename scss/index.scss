@@ -124,7 +124,7 @@ button {width: auto;}
 .anchor {
 	position: relative;
 	top: 0px;
-	display: block;
+	display: block!important;
 	height: 110px;
 	margin-top: -110px;
 	visibility: hidden;
